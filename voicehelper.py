@@ -34,7 +34,7 @@ def recognize_cmd(cmd):
 	elif cmd.startswith(options["browser"]):
 		if cmd == 'вк' or cmd == 'вконтакте':
 			speak("Открываю")
-			webbrowser.open_new("https://vk.com/feed")
+			webbrowser.open_new("https://vk.com")
 		if cmd == 'инста' or cmd == 'instagram':
 			speak("Открываю")
 			webbrowser.open_new("https://www.instagram.com")
