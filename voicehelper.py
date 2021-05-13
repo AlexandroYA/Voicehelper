@@ -7,12 +7,12 @@ import datetime
 import os
 run = True
 options = {
-	"name": ("катя" , "екатерина" , "катерина" , "катюша") ,
+	"name": ("катя" , "екатерина" , "катерина" , "катюша" ) ,
 
 	"key_w": ("скажи" , "покажи" , "произнеси" , "расскажи" , "сколько"),
 
 	"ctime" : ("сколько время" , "который час" , "время"),
-	"browser" : ("вк" , "инстаграм" , "вконтакте" , "инста" , "экж" , "дневник" , "ютуб" , "видосы"), 
+	"browser" : ("вк" , "instagram" , "вконтакте" , "инста" , "инстаграм", "экж" , "дневник" , "youtube" , "видео", "vk"), 
 	"windows" : ("выключи компьютер" , "перезагрузи" , "выключи" , "перезагрузи компьютер"),
 	"calculator" : ("посчитай" , "умножь" , "раздели" , "вычитание"),
 	"work": ("заканчивай" , "стоп", "отключайся")
@@ -32,16 +32,16 @@ def recognize_cmd(cmd):
 		now = datetime.datetime.now()
 		speak("Сейчас " + str(now.hour) + ":" + str(now.minute) + ":" + str(now.second))
 	elif cmd.startswith(options["browser"]):
-		if cmd == 'вк' or cmd == 'вконтакте':
+		if cmd == 'вк' or cmd == 'вконтакте' or cmd == 'vk':
 			speak("Открываю")
-			webbrowser.open_new("https://vk.com")
-		if cmd == 'инста' or cmd == 'instagram':
+			webbrowser.open_new("https://vk.com/feed")
+		if cmd == 'инста' or cmd == 'instagram' or cmd == 'инастаграм':
 			speak("Открываю")
 			webbrowser.open_new("https://www.instagram.com")
 		if cmd == 'экж' or cmd == 'дневник':
 			speak("Знания, оценки, домашка..")
 			webbrowser.open_new("https://cop.admhmao.ru/")
-		if cmd == "видосы" or cmd == "ютуб":
+		if cmd == 'видео' or cmd == 'youtube':
 			speak("Открываю")
 			webbrowser.open_new("https://www.youtube.com")	
 	elif cmd.startswith(options["windows"]):
@@ -67,15 +67,15 @@ def record_volume():
 			cmd = voice
 			speak("Слушаю")
 			for x in options['name']:
-				cmd = cmd.replace(x,"").strip()	
-				print("[log] Распознано: " + str(cmd))
+				cmd = cmd.replace(x,'').strip()
+			print("[log] Распознано: " + str(cmd))
 			recognize_cmd(cmd)
-		if voice.startswith(options['key_w']):
+		
+		elif voice.startswith(options['key_w']):
 			cmd = voice
 			speak("Слушаю")
 			for x in options['key_w']:
 				cmd = cmd.replace(x,'').strip()
-				print("[log] Распознано: " + str(cmd))
 				recognize_cmd(cmd)
 		else:
 			print("[log] Распознано: " + str(voice))		
@@ -88,7 +88,7 @@ engine = pyttsx3.init()
 #Установить уникальный голос
 voices = engine.getProperty('voices' )
 engine.setProperty('voice' , voices[0].id )
-speak("Приветствую Вас, Александр..Слушаю")
+speak("Приветствую Вас, Александр...Слушаю")
 
 while run: 
 	time.sleep(0.1)
